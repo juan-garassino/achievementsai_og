@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %} {% endblock %}</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', path='/favicon.png') }}"
+    />
+    <link href="{{ url_for('static', path='/global.css') }}" rel="stylesheet" />
+
+  </head>
+
+  <body>
+    {% include 'components/header.html' %}
+    <main>{% block content %} {% endblock %}</main>
+    <!-- Simple Analytics - 100% privacy-first analytics -->
+    <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+  </body>
+</html>

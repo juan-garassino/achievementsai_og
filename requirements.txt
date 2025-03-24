@@ -22,3 +22,14 @@ pysqlite3-binary
 # transformers
 # spacy
 
+llama-index
+langchain
+openai
+pypdf
+ipython-ngql
+nebula3-python
+networkx
+pyvis
+ipython-ngql
+
+llama-index-llms-azure-inference

@@ -1,0 +1,123 @@
+<form id="input" class="input">
+  <hr />
+  <textarea
+    name="context"
+    placeholder="Ask your question about movies, their cast, or genres..."
+  ></textarea>
+  <div class="row">
+    <div  class="row">
+    <select name="llm" class="select-llm">
+      {% for key in llms %}
+      <option value="{{ key }}">{{ key }}</option>
+      {% endfor %}
+    </select>
+     <select name="database" class="select-database">
+      {% for key in databases %}
+      <option value="{{ key }}">{{ key|capitalize }} database</option>
+      {% endfor %}
+    </select>
+    <select name="workflow">
+      {% for key in workflows %}
+      <option value="{{ key }}">{{ key|capitalize|replace('_', ' ') }}  workflow</option>
+      {% endfor %}
+    </select>
+    </div>
+    <button type="submit">Run workflow ►</button>
+  </div>
+</form>
+<script type="module">
+  import { SSE } from './static/sse.js';
+
+  function createDivElement(classNames = "", content = "") {
+    const element = document.createElement("div");
+    element.classList = classNames;
+    element.textContent = content;
+    return element;
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("input");
+    const outputDiv = document.getElementById("output");
+
+    function scrollToBottom() {
+      outputDiv.parentElement.scrollTo(
+        0,
+        outputDiv.parentElement.scrollHeight
+      );
+    }
+
+    function submitForm(event) {
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const llm = formData.get("llm");
+      const context = formData.get('context');
+      const database = formData.get("database");
+
+      if(context.length === 0) {
+        return
+      }
+
+      const userMessage = createDivElement("message user");
+      userMessage.innerHTML = `<span class="label">Workflow input [${llm}/${database}]:</span><br />`;
+      userMessage.innerHTML += formData.get("context");
+
+      const loader = createDivElement("loader", "");
+
+      outputDiv.append(userMessage);
+      outputDiv.append(loader);
+      scrollToBottom();
+
+      const sse = new SSE("/workflow/", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        payload: JSON.stringify({
+          "llm": llm,
+          "database": database,
+          "workflow": formData.get('workflow'),
+          "context": context,
+        }),
+      });
+
+      let message = null;
+      let lastEventLabel= "";
+
+      sse.addEventListener('message', function(e) {
+        const data = JSON.parse(e.data);
+
+        if (data.event_type) {
+          if (lastEventLabel !== data.label) {
+            message = createDivElement();
+            message.classList = "message step";
+            message.innerHTML = `<span class="label">${data.label} [${llm}/${database}]:</span><br />`;
+            outputDiv.insertBefore(message, loader);
+          }
+          message.innerHTML += data.message;
+          if(data.event_type === "error") {
+             loader.remove();
+          }
+        } else {
+          loader.remove();
+        }
+
+        // store last event uuid
+        lastEventLabel = data.label;
+
+        // scroll to bottom on every chunk response
+        scrollToBottom()
+      });
+    }
+
+    form.addEventListener("submit", submitForm);
+
+    // Add keydown listener for Ctrl + Enter
+    form.addEventListener("keydown", function(event) {
+      if (event.key === 'Enter' && event.ctrlKey) {
+        submitForm(event);
+      }
+    });
+
+  });
+</script>

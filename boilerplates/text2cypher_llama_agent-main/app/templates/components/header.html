@@ -1,0 +1,21 @@
+<header>
+    ♠ Text2Cypher Llama Agents
+    <a id="openHelp">→ help</a>
+    <dialog id="helpDialog">
+        {% include 'components/docs.html'  %}
+        <button class="dialog-close" id="closeHelp">×</button>
+    </dialog>
+</header>
+<script>
+    const openButton = document.getElementById("openHelp");
+    const closeButton = document.getElementById("closeHelp");
+    const dialog = document.getElementById("helpDialog");
+
+    openButton.addEventListener("click", () => {
+        dialog.showModal();
+    });
+
+    closeButton.addEventListener("click", () => {
+        dialog.close();
+    });
+</script>

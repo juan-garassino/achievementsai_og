@@ -1,0 +1,10 @@
+{% extends "./layouts/basic.html" %}
+
+{% block title %}text2cypher_agent{% endblock %}
+
+{% block content %}
+{% include 'components/output.html'  %}
+{% with workflows=workflows %}
+    {% include 'components/input.html'  %}
+{% endwith %}
+{% endblock %}

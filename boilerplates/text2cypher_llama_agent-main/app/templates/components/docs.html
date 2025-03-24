@@ -1,0 +1,77 @@
+<div>
+    <p>
+        Text2Cypher Llama Agents
+    </p>
+    <p>
+        A collection of LlamaIndex Workflows-powered agents that convert natural language to Cypher queries designed to retrieve information from a Neo4j database to answer the question.
+    </p>
+    <details>
+        <summary>Naive text2cypher flow</summary>
+        <p>
+        The naive text2cypher architecture is a streamlined approach to converting natural
+        language questions into Cypher queries for Neo4j graph databases. It operates through a
+        three-stage workflow: first, it generates a Cypher query from the input question using few-
+        shot learning with similar examples stored in a vector database. The system then
+        executes the generated Cypher query against the graph database. Finally, it processes
+        the database results through a language model to generate a natural language response
+        that directly answers the original question. This architecture maintains a simple yet
+        effective pipeline, leveraging vector similarity search for example fewshot retrieval and
+        LLM for both Cypher query generation and response formatting.
+        </p>
+    </details>
+    <details>
+        <summary>Naive text2cypher with retry flow</summary>
+        <p>
+        This enhanced version of text2cypher with retry builds upon the original architecture by
+        adding a self-correction mechanism. When a generated Cypher query fails to execute,
+        instead of failing outright, the system attempts to fix the query by feeding the error
+        information back to the language model in the CorrectCypherEventstep. This makes the
+        system more resilient and capable of handling initial mistakes, similar to how a human
+        might revise their approach after receiving error feedback.
+        </p>
+        <p>
+        The ExecuteCypherEvent function first attempts to run the query, and if successful, passes the results
+        forward for summarization. However, if something goes wrong, it doesn’t give up
+        immediately — instead, it checks if it has any retry attempts left and, if so, sends the
+        query back for correction along with information about what went wrong. This creates a
+        more forgiving system that can learn from its mistakes, much like how we might revise
+        our approach after receiving feedback.
+        </p>
+    </details>
+
+    <details>
+        <summary>Naive text2cypher with retry and evaluation flow</summary>
+        <p>
+        Building on the naive text2cypher with retry flow, this enhanced version adds an
+        evaluation phase that checks if the query results are sufficient to answer the user's
+        question. If the results are deemed inadequate, the system sends the query back for
+        correction with information on how to improve it. If the results are acceptable, the flow
+        proceeds to the final summarization step. This extra layer of validation further bolsters the
+        resilience of the pipeline, ensuring that the user ultimately receives the most accurate and
+        complete answer possible.
+        </p>
+        <p>
+        The function evaluate_check is a simple check that determines whether the query results
+        adequately address the user's question. If the evaluation indicates the results are
+        insufficient and there are retry attempts remaining, it returns a CorrectCypherEventso the
+        query can be refined. Otherwise, it proceeds with a SummarizeEvent,indicating that the
+        results are suitable for final summarization.
+        </p>
+    </details>
+
+
+
+    <details>
+        <summary>Iterative planner flow</summary>
+        <p>
+        The iterative planner flow introduces a more sophisticated approach by implementing an
+        iterative planning system. Instead of directly generating a Cypher query, it first creates a
+        plan of sub-queries, validates each query before execution, and includes an information
+        checking mechanism that can modify the plan if the initial results are insufficient. The
+        system can make up to three iterations of information gathering, each time refining its
+        approach based on previous results. This creates a more thorough and accurate
+        question-answering system that can handle complex queries by breaking them down into
+        manageable steps and validating the information at each stage.
+        </p>
+    </details>
+</div>

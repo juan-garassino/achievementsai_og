@@ -1,0 +1,223 @@
+@font-face {
+  font-family: mono;
+  src: url(font.otf);
+}
+
+:root {
+  --small-spacing: 5px;
+  --default-spacing: 10px;
+  --primary-color: black;
+  --background-color: white;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--background-color);
+}
+
+body {
+  font-family: mono;
+  color: var(--primary-color);
+  padding-top: 70px;
+  padding-bottom: 200px;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 70px;
+  padding: var(--default-spacing);
+
+}
+
+main {
+  height: 100%;
+  overflow-y: auto;
+}
+
+a {
+  color: var(--highlight-color);
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+hr {
+  height: 1px;
+  background-color: var(--primary-color);
+  border: 0;
+  margin: 0 0 var(--default-spacing) 0;
+  padding: 0;
+}
+
+input {
+  border: 0;
+  font-family: mono;
+  background-color: var(--shade-color);
+  color: var(--highlight-color);
+  padding: var(--small-spacing);
+}
+
+select {
+  font-family: mono;
+  width: auto;
+  height: 42px;
+  padding: var(--small-spacing);
+  border: 1px solid var(--primary-color);
+  background: white;
+  margin: 0 0 var(--default-spacing) 0;
+}
+
+textarea {
+  padding: var(--small-spacing);
+  border: 1px solid var(--primary-color);
+}
+
+::placeholder {
+  color: var(--primary-color);
+  font-style: italic;
+}
+
+button {
+  position: relative;
+  padding: var(--small-spacing);
+  border: 1px solid var(--primary-color);
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  font-family: mono;
+  cursor: pointer;
+  height: 42px;
+}
+
+button:hover {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+}
+
+.description  {
+  padding: var(--default-spacing) 0;
+  border-bottom: 1px dashed var(--primary-color);
+  margin: 0;
+  font-size: 10px;
+}
+
+details {
+  position: relative;
+  border-bottom: 1px dashed var(--primary-color);
+}
+
+details:last-of-type {
+  border-bottom: 0;
+}
+
+.dialog-close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--primary-color);
+  color: white;
+  width: 25px;
+  height: 25px;
+}
+
+summary {
+  padding: var(--default-spacing) 0;
+  cursor: pointer;
+}
+
+dialog {
+  width: calc(100% - var(--default-spacing));
+  max-width: 800px;
+  border: 1px solid var(--primary-color);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.output {
+  height: 100%;
+  padding: var(--default-spacing);
+}
+
+.message {
+  white-space: pre-wrap;
+  margin-bottom: calc(var(--default-spacing) * 2);
+  border-top: 1px dashed var(--primary-color);
+}
+
+.message:first-child {
+  border-top: 0;
+}
+
+.message .label {
+  display: inline-block;
+  font-size: 10px;
+  padding: 20px 0 3px 0;
+}
+
+.loader::after {
+  content: "▄ ▄ ▄";
+  animation: loading 1s linear infinite;
+  font-size: 10px;
+}
+
+@keyframes loading {
+  0% {
+    content: "▄ ▄ ▄";
+  }
+  25% {
+    content: "█ ▄ ▄";
+  }
+  50% {
+    content: "▄ █ ▄";
+  }
+  75% {
+    content: "▄ ▄ █";
+  }
+}
+
+.input {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  padding: var(--default-spacing);
+  background-color: var(--background-color);
+}
+
+.input textarea {
+  width: 100%;
+  height: 100px;
+  padding: var(--default-spacing);
+  margin-bottom: var(--default-spacing);
+}
+
+.input button[type="submit"] {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+}
+
+.input button[type="submit"]:hover {
+  background-color: var(--background-color);
+  color: var(--primary-color);
+}
