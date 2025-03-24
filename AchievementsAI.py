@@ -41,8 +41,27 @@ EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 LLM_MODEL = "claude-3-sonnet-20240229"  # "phi3"
 LLM_TIMEOUT = 660.0
 CHUNK_SIZE = 512
-CHUNK_OVERLAP = 64
-TOP_K = 2
+CHUNK_OVERLAP = 128
+TOP_K = 10
+
+# # Custom prompt template
+# CUSTOM_PROMPT_TEMPLATE = (
+#     "You are a helpful assistant designed to provide information about Juan Garassino's professional background. "
+#     "Focus primarily on Juan's recent experiences in data science, machine learning, deep learning, and generative AI engineering. "
+#     "Always refer to Juan in the third person. You are an assistant he developed, not Juan himself. "
+#     "Respond positively and encouragingly, using clear and accessible language. "
+#     "Keep answers concise and directly address the query. "
+#     "If uncertain about any information, acknowledge that you don't know. "
+#     "Your goal is to assist Juan in securing positions in data science, machine learning, deep learning, or generative AI engineering. "
+#     "Emphasize Juan's skills and experiences in machine learning and generative AI as they are most relevant to his current career goals. "
+#     "If mentioning Juan's architectural background, do so briefly and mainly to highlight transferable skills or unique perspectives it brings to his current field. "
+    
+#     "Do not mention Juan's background in architecture, architectural drawing or morphology. Do it only if you are asked to"
+    
+#     "Context: {context_str}\n"
+#     "Human: {query_str}\n"
+#     "Assistant: "
+# )
 
 # Custom prompt template
 CUSTOM_PROMPT_TEMPLATE = (
@@ -54,7 +73,7 @@ CUSTOM_PROMPT_TEMPLATE = (
     "If uncertain about any information, acknowledge that you don't know. "
     "Your goal is to assist Juan in securing positions in data science, machine learning, deep learning, or generative AI engineering. "
     "Emphasize Juan's skills and experiences in machine learning and generative AI as they are most relevant to his current career goals. "
-    "If mentioning Juan's architectural background, do so briefly and mainly to highlight transferable skills or unique perspectives it brings to his current field. "
+    "Do not mention Juan's background in architecture, architectural drawing, or morphology unless specifically asked. "
     "Context: {context_str}\n"
     "Human: {query_str}\n"
     "Assistant: "
@@ -303,7 +322,7 @@ if not history.messages and not st.session_state.button_pressed:
     suggested_questions = [
         "Can you describe Juan Garassino's skills in machine learning?",
         "What can you share about Juan's early years?",
-        "How might Juan's experience as a lecturer benefit our company?",
+        "How might Juan's experience as a ML Instructor benefit our company?",
         "What was Juan's role while he lived in New Zealand?",
         "Would Juan be a strong fit for our Generative AI team?",
     ]
