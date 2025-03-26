@@ -1,0 +1,9 @@
+.node {
+  fill: #e3e9f2;
+}
+
+.node.highlight {
+  fill: #17bebb;
+  cursor: pointer;
+  transition: fill 0.3s ease;
+}
