@@ -1,0 +1,26 @@
+Log file created at: 2025/04/07 16:17:04
+Running on machine: 82181be9f3be
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I20250407 16:17:04.255146     1 GraphDaemon.cpp:122] Starting Graph HTTP Service
+I20250407 16:17:04.329514     7 WebService.cpp:124] Web service started on HTTP[19669]
+I20250407 16:17:04.333720     1 GraphDaemon.cpp:136] Number of networking IO threads: 1
+I20250407 16:17:04.335593     1 GraphDaemon.cpp:145] Number of worker threads: 1
+I20250407 16:17:04.415225     1 MetaClient.cpp:80] Create meta client to "172.28.1.1":9559
+I20250407 16:17:04.435391     1 MetaClient.cpp:81] root path: /usr/local/nebula, data path size: 0
+I20250407 16:17:06.520951     1 MetaClient.cpp:3267] Load leader ok
+I20250407 16:17:06.528875     1 MetaClient.cpp:162] Register time task for heartbeat!
+I20250407 16:17:06.531977     1 GraphSessionManager.cpp:337] Total of 0 sessions are loaded
+E20250407 16:17:06.533902     1 MemoryUtils.cpp:167] Total memory less than untracked 50 Mib, MemoryTracker limit is not set properly,  Current memory stats:MemoryStats: 8589934592.000GiB/25.000MiB
+I20250407 16:17:06.571487     1 MemoryUtils.cpp:171] MemoryTracker set static ratio: 0.8
+I20250407 16:17:06.585660     1 Snowflake.cpp:17] WorkerId init success: 0
+I20250407 16:17:06.587690    32 GraphServer.cpp:63] Starting nebula-graphd on 172.28.1.3:9669
+I20250407 16:18:04.757750    19 GraphService.cpp:77] Authenticating user root from 172.28.0.2:51112
+W20250407 16:18:04.773155    19 SpaceExecutor.cpp:26] Create space fail: Host not enough!
+E20250407 16:18:04.776988    19 QueryInstance.cpp:151] Host not enough!, query: CREATE SPACE IF NOT EXISTS llamaindex_property_graph(vid_type=FIXED_STRING(256));
+I20250407 16:18:04.930689    19 GraphService.cpp:77] Authenticating user root from 172.28.0.2:51136
+I20250407 16:18:05.071012    19 GraphService.cpp:77] Authenticating user root from 172.28.0.2:51146
+I20250407 16:21:04.798341     1 GraphDaemon.cpp:176] Signal 15(Terminated) received, stopping this server
+I20250407 16:21:04.802143    32 GraphServer.cpp:74] nebula-graphd on 172.28.1.3:9669 has been stopped
+I20250407 16:21:04.804163     1 GraphDaemon.cpp:161] The graph Daemon stopped
+I20250407 16:21:04.806015     1 GraphServer.cpp:109] The graph server has been stopped

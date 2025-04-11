@@ -1,0 +1,24 @@
+Log file created at: 2025/04/07 16:21:08
+Running on machine: 6b8f591d5b35
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+E20250407 16:21:08.542043     1 MemoryUtils.cpp:167] Total memory less than untracked 50 Mib, MemoryTracker limit is not set properly,  Current memory stats:MemoryStats: 8589934592.000GiB/25.000MiB
+E20250407 16:23:57.771754    18 QueryInstance.cpp:151] SyntaxError: syntax error near `EXIT', query: MATCH (p:person) RETURN p LIMIT 10;EXIT;
+E20250407 16:23:59.500696    18 QueryInstance.cpp:151] SyntaxError: syntax error near `EXIT', query: EXIT;
+E20250407 16:24:04.504719    18 QueryInstance.cpp:151] SyntaxError: syntax error near `EXIT', query: EXIT
+E20250407 16:24:12.053777    18 QueryInstance.cpp:151] SyntaxError: syntax error near `EXIT', query: EXIT;
+E20250407 16:25:16.936021    18 UseValidator.cpp:28] Unknown space: llamaindex_property_graph : SpaceNotFound: SpaceName `llamaindex_property_graph`
+E20250407 16:25:16.942082    18 QueryInstance.cpp:151] SpaceNotFound: SpaceName `llamaindex_property_graph`, query: USE llamaindex_property_graph
+W20250407 16:26:26.546676    18 TagIndexExecutor.cpp:31] SpaceId: 2, Create index `idx_Entity__' at tag: `Entity__' failed: Invalid param!
+E20250407 16:26:26.550576    18 QueryInstance.cpp:151] Invalid param!, query: 
+CREATE TAG INDEX IF NOT EXISTS idx_Entity__ ON `Entity__`(`name`);
+CREATE TAG INDEX IF NOT EXISTS idx_Chunk__ ON `Chunk__`(`text`);
+CREATE TAG INDEX IF NOT EXISTS idx_Node__ ON `Node__`(`label`);
+CREATE EDGE INDEX IF NOT EXISTS idx_Relation__ ON `Relation__`(`label`);
+
+CREATE EDGE INDEX IF NOT EXISTS idx_meta__node_label__ ON `__meta__node_label__`(`label`);
+CREATE EDGE INDEX IF NOT EXISTS idx_meta__rel_label__ ON `__meta__rel_label__`(`label`);
+E20250407 16:26:26.574637    18 FunctionUdfManager.cpp:41] UDF Folder doesn't Exist!
+E20250407 16:26:26.580730    18 QueryInstance.cpp:151] SemanticError: `__meta__node_label__': Unknown edge type, query: MATCH ()-[node_label:`__meta__node_label__`]->() RETURN node_label.label AS name, JSON_EXTRACT(node_label.props_json) AS props
+E20250407 16:27:00.580858    18 LabelIndexSeek.cpp:56] SemanticError: No valid index for label `__meta__node_label__'.
+E20250407 16:27:00.594014    18 LabelIndexSeek.cpp:56] SemanticError: No valid index for label `__meta__rel_label__'.

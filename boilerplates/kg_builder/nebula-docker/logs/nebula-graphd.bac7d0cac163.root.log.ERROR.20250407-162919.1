@@ -1,0 +1,21 @@
+Log file created at: 2025/04/07 16:29:19
+Running on machine: bac7d0cac163
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+E20250407 16:29:19.751658     1 MemoryUtils.cpp:167] Total memory less than untracked 50 Mib, MemoryTracker limit is not set properly,  Current memory stats:MemoryStats: 8589934592.000GiB/25.000MiB
+E20250407 16:32:35.048588    19 UseValidator.cpp:28] Unknown space: llamaindex_property_graph : SpaceNotFound: SpaceName `llamaindex_property_graph`
+E20250407 16:32:35.055713    19 QueryInstance.cpp:151] SpaceNotFound: SpaceName `llamaindex_property_graph`, query: USE llamaindex_property_graph
+E20250407 16:33:44.917531    19 QueryInstance.cpp:151] SyntaxError: syntax error near ``', query: `CREATE SPACE IF NOT EXISTS llamaindex_property_graph(vid_type=FIXED_STRING(256), replica_factor=1, partition_num=1);`
+E20250407 16:34:13.786654    19 QueryInstance.cpp:151] SyntaxError: syntax error near `$ SHOW S', query: $ SHOW SPACES;
+E20250407 16:34:29.348466    19 QueryInstance.cpp:151] Invalid param!, query: 
+CREATE TAG INDEX IF NOT EXISTS idx_Entity__ ON `Entity__`(`name`);
+CREATE TAG INDEX IF NOT EXISTS idx_Chunk__ ON `Chunk__`(`text`);
+CREATE TAG INDEX IF NOT EXISTS idx_Node__ ON `Node__`(`label`);
+CREATE EDGE INDEX IF NOT EXISTS idx_Relation__ ON `Relation__`(`label`);
+
+CREATE EDGE INDEX IF NOT EXISTS idx_meta__node_label__ ON `__meta__node_label__`(`label`);
+CREATE EDGE INDEX IF NOT EXISTS idx_meta__rel_label__ ON `__meta__rel_label__`(`label`);
+E20250407 16:34:29.369474    19 FunctionUdfManager.cpp:41] UDF Folder doesn't Exist!
+E20250407 16:34:29.375478    19 QueryInstance.cpp:151] SemanticError: `__meta__node_label__': Unknown edge type, query: MATCH ()-[node_label:`__meta__node_label__`]->() RETURN node_label.label AS name, JSON_EXTRACT(node_label.props_json) AS props
+E20250407 16:34:52.597900    19 LabelIndexSeek.cpp:56] SemanticError: No valid index for label `__meta__node_label__'.
+E20250407 16:34:52.608714    19 LabelIndexSeek.cpp:56] SemanticError: No valid index for label `__meta__rel_label__'.

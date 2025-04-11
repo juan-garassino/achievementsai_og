@@ -1,0 +1,54 @@
+Log file created at: 2025/04/07 16:21:06
+Running on machine: 6b8f591d5b35
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I20250407 16:21:06.438849     1 GraphDaemon.cpp:122] Starting Graph HTTP Service
+I20250407 16:21:06.478077     6 WebService.cpp:124] Web service started on HTTP[19669]
+I20250407 16:21:06.480145     1 GraphDaemon.cpp:136] Number of networking IO threads: 1
+I20250407 16:21:06.483223     1 GraphDaemon.cpp:145] Number of worker threads: 1
+I20250407 16:21:06.485893     1 MetaClient.cpp:80] Create meta client to "172.28.1.1":9559
+I20250407 16:21:06.488639     1 MetaClient.cpp:81] root path: /usr/local/nebula, data path size: 0
+I20250407 16:21:08.528012     1 MetaClient.cpp:3267] Load leader ok
+I20250407 16:21:08.535420     1 MetaClient.cpp:162] Register time task for heartbeat!
+I20250407 16:21:08.539201     1 GraphSessionManager.cpp:337] Total of 0 sessions are loaded
+E20250407 16:21:08.542043     1 MemoryUtils.cpp:167] Total memory less than untracked 50 Mib, MemoryTracker limit is not set properly,  Current memory stats:MemoryStats: 8589934592.000GiB/25.000MiB
+I20250407 16:21:08.587023     1 MemoryUtils.cpp:171] MemoryTracker set static ratio: 0.8
+I20250407 16:21:08.596472     1 Snowflake.cpp:17] WorkerId init success: 1
+I20250407 16:21:08.599169    31 GraphServer.cpp:63] Starting nebula-graphd on 172.28.1.3:9669
+I20250407 16:22:40.581457    18 GraphService.cpp:77] Authenticating user root from 172.28.0.2:49156
+I20250407 16:23:29.174150    28 MetaClient.cpp:3261] Load leader of "172.28.1.2":9779 in 0 space
+I20250407 16:23:29.176542    28 MetaClient.cpp:3267] Load leader ok
+I20250407 16:23:37.082811    18 SwitchSpaceExecutor.cpp:45] Graph switched to `test_space', space id: 2
+I20250407 16:23:39.206341    28 MetaClient.cpp:3261] Load leader of "172.28.1.2":9779 in 1 space
+I20250407 16:23:39.207652    28 MetaClient.cpp:3267] Load leader ok
+I20250407 16:23:49.234169    28 MetaClient.cpp:3261] Load leader of "172.28.1.2":9779 in 1 space
+I20250407 16:23:49.236682    28 MetaClient.cpp:3267] Load leader ok
+E20250407 16:23:57.771754    18 QueryInstance.cpp:151] SyntaxError: syntax error near `EXIT', query: MATCH (p:person) RETURN p LIMIT 10;EXIT;
+E20250407 16:23:59.500696    18 QueryInstance.cpp:151] SyntaxError: syntax error near `EXIT', query: EXIT;
+E20250407 16:24:04.504719    18 QueryInstance.cpp:151] SyntaxError: syntax error near `EXIT', query: EXIT
+E20250407 16:24:12.053777    18 QueryInstance.cpp:151] SyntaxError: syntax error near `EXIT', query: EXIT;
+I20250407 16:25:16.926618    18 GraphService.cpp:77] Authenticating user root from 192.168.65.1:52318
+E20250407 16:25:16.936021    18 UseValidator.cpp:28] Unknown space: llamaindex_property_graph : SpaceNotFound: SpaceName `llamaindex_property_graph`
+E20250407 16:25:16.942082    18 QueryInstance.cpp:151] SpaceNotFound: SpaceName `llamaindex_property_graph`, query: USE llamaindex_property_graph
+I20250407 16:26:26.444849    18 GraphService.cpp:77] Authenticating user root from 192.168.65.1:63349
+I20250407 16:26:26.452723    18 SwitchSpaceExecutor.cpp:45] Graph switched to `test_space', space id: 2
+W20250407 16:26:26.546676    18 TagIndexExecutor.cpp:31] SpaceId: 2, Create index `idx_Entity__' at tag: `Entity__' failed: Invalid param!
+E20250407 16:26:26.550576    18 QueryInstance.cpp:151] Invalid param!, query: 
+CREATE TAG INDEX IF NOT EXISTS idx_Entity__ ON `Entity__`(`name`);
+CREATE TAG INDEX IF NOT EXISTS idx_Chunk__ ON `Chunk__`(`text`);
+CREATE TAG INDEX IF NOT EXISTS idx_Node__ ON `Node__`(`label`);
+CREATE EDGE INDEX IF NOT EXISTS idx_Relation__ ON `Relation__`(`label`);
+
+CREATE EDGE INDEX IF NOT EXISTS idx_meta__node_label__ ON `__meta__node_label__`(`label`);
+CREATE EDGE INDEX IF NOT EXISTS idx_meta__rel_label__ ON `__meta__rel_label__`(`label`);
+I20250407 16:26:26.571832    18 FunctionUdfManager.cpp:93] Load UDF so library: /home/nebula/dev/nebula/udf/
+E20250407 16:26:26.574637    18 FunctionUdfManager.cpp:41] UDF Folder doesn't Exist!
+E20250407 16:26:26.580730    18 QueryInstance.cpp:151] SemanticError: `__meta__node_label__': Unknown edge type, query: MATCH ()-[node_label:`__meta__node_label__`]->() RETURN node_label.label AS name, JSON_EXTRACT(node_label.props_json) AS props
+I20250407 16:26:29.377122    28 MetaClient.cpp:3261] Load leader of "172.28.1.2":9779 in 1 space
+I20250407 16:26:29.379555    28 MetaClient.cpp:3267] Load leader ok
+E20250407 16:27:00.580858    18 LabelIndexSeek.cpp:56] SemanticError: No valid index for label `__meta__node_label__'.
+E20250407 16:27:00.594014    18 LabelIndexSeek.cpp:56] SemanticError: No valid index for label `__meta__rel_label__'.
+I20250407 16:29:12.622315     1 GraphDaemon.cpp:176] Signal 15(Terminated) received, stopping this server
+I20250407 16:29:12.627218    31 GraphServer.cpp:74] nebula-graphd on 172.28.1.3:9669 has been stopped
+I20250407 16:29:12.629173     1 GraphDaemon.cpp:161] The graph Daemon stopped
+I20250407 16:29:12.631233     1 GraphServer.cpp:109] The graph server has been stopped
