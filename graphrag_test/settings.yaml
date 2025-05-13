@@ -10,11 +10,11 @@ models:
     api_base: ${AZURE_OPENAI_ENDPOINT_LLM} #https://<instance>.openai.azure.com
     api_version: "2024-06-01" # ${AZURE_OPENAI_API_VERSION} # 2024-05-01-preview
     auth_type: api_key # or azure_managed_identity
-    api_key: ${GRAPHRAG_API_KEY} # set this in the generated .env file
+    api_key: ${AZURE_OPENAI_APIKEY} # set this in the generated .env file
     # audience: "https://cognitiveservices.azure.com/.default"
     # organization: <organization_id>
-    model: gpt-4o
-    deployment_name: "gpt-4o-gs"
+    model: gpt-4o-mini
+    deployment_name: "gpt-4o-mini"
     # encoding_model: cl100k_base # automatically set by tiktoken if left undefined
     model_supports_json: true # recommended if this is available for your model.
     concurrent_requests: 25 # max number of simultaneous LLM requests allowed
@@ -28,11 +28,11 @@ models:
     api_base: ${AZURE_OPENAI_ENDPOINT_EMBEDDING} #https://<instance>.openai.azure.com
     api_version: "2024-06-01" # ${AZURE_OPENAI_API_VERSION} # 2024-05-01-preview
     auth_type: api_key # or azure_managed_identity
-    api_key: ${GRAPHRAG_API_KEY}
+    api_key: ${AZURE_OPENAI_APIKEY}
     # audience: "https://cognitiveservices.azure.com/.default"
     # organization: <organization_id>
-    model: text-embedding-ada-002 # text-embedding-3-small
-    deployment_name: "text-embedding"
+    model: text-embedding-3-large # text-embedding-3-small
+    deployment_name: "text-embedding-3-large"
     # encoding_model: cl100k_base # automatically set by tiktoken if left undefined
     model_supports_json: true # recommended if this is available for your model.
     concurrent_requests: 25 # max number of simultaneous LLM requests allowed
