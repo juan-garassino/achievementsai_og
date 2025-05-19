@@ -209,7 +209,7 @@ def main():
     container = st.container()
     
     # Path to HTML file
-    html_file_path = "dynamic_kg.html"
+    html_file_path = "dynamic_kg_20250516_180943.html"
     
     try:
         # Get HTML content with loading screen

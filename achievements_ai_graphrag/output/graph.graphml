@@ -1,0 +1,972 @@
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d0" for="edge" attr.name="weight" attr.type="double" />
+  <graph edgedefault="undirected">
+    <node id="JUAN GARASSINO" />
+    <node id="UNIVERSIDAD DE BUENOS AIRES" />
+    <node id="&#201;COLE NATIONALE SUP&#201;RIEURE D&#8217;ARCHITECTURE PARIS-MALAQUAIS" />
+    <node id="LE WAGON" />
+    <node id="CAIDERA" />
+    <node id="AI FOR SMART CITIES" />
+    <node id="PROMPTPLOT" />
+    <node id="BIM DESIGN COORDINATOR" />
+    <node id="MACHINE-LEARNING-BASED URBANIST" />
+    <node id="DEEP LEARNING AND MLOPS INSTRUCTOR" />
+    <node id="TOKYO" />
+    <node id="BUENOS AIRES" />
+    <node id="BERLIN" />
+    <node id="DEEPSCULPT" />
+    <node id="LAMAINDEX" />
+    <node id="GANS" />
+    <node id="PPO AGENTS" />
+    <node id="SPAIN" />
+    <node id="TECHNICAL ARTICLES" />
+    <node id="ARGENTINA" />
+    <node id="ITALY" />
+    <node id="UNIVERSITY OF BUENOS AIRES" />
+    <node id="PHYSICS" />
+    <node id="MATHEMATICS" />
+    <node id="CHEMISTRY" />
+    <node id="BIOLOGY" />
+    <node id="HISTORY" />
+    <node id="GEOGRAPHY" />
+    <node id="RIO DE LA PLATA" />
+    <node id="UBA" />
+    <node id="JUAN" />
+    <node id="&#201;COLE DES BEAUX-ARTS MALACHAIS" />
+    <node id="GALPON STUDIO" />
+    <node id="KIRI TE KANAWA THEATRE" />
+    <node id="AOTEA CENTRE" />
+    <node id="AUCKLAND COUNCIL BUILDINGS" />
+    <node id="AUCKLAND ART GALLERY" />
+    <node id="CHILE" />
+    <node id="BRAZIL" />
+    <node id="NEW ZEALAND" />
+    <node id="FRENCH" />
+    <node id="MORPHOLOGY" />
+    <node id="PARIS" />
+    <node id="GERMANY" />
+    <node id="2018" />
+    <node id="AMSTERDAM" />
+    <node id="GERMAN RESEARCH CENTER FOR ARTIFICIAL INTELLIGENCE" />
+    <node id="LONDON" />
+    <node id="BARCELONA" />
+    <node id="UNITED ARAB EMIRATES" />
+    <node id="MALAYSIA" />
+    <node id="SINGAPORE" />
+    <node id="NETHERLANDS" />
+    <node id="DUBAI" />
+    <node id="ABU DHABI" />
+    <node id="MOHAMED BIN ZAYED UNIVERSITY OF ARTIFICIAL INTELLIGENCE" />
+    <node id="SMART NATION INITIATIVE" />
+    <node id="JAPAN" />
+    <node id="LLAMAINDEX" />
+    <node id="3D AI FOR ARCHITECTURE" />
+    <node id="SMART CITIES PROJECTS" />
+    <node id="MULTIAGENT SYSTEMS" />
+    <node id="COGNITIVE AGENTS" />
+    <node id="DEEP LEARNING PIPELINES" />
+    <node id="GENERATIVE AI" />
+    <node id="SUSTAINABILITY" />
+    <node id="HEALTHCARE" />
+    <node id="ARCHITECTURE" />
+    <node id="ARTIFICIAL INTELLIGENCE" />
+    <node id="EUROPE" />
+    <node id="MIDDLE EAST" />
+    <node id="ASIA" />
+    <node id="CULTURAL INTELLIGENCE" />
+    <node id="SYSTEMS THINKING" />
+    <node id="HUMAN-CENTERED DESIGN" />
+    <node id="ITERATIVE DESIGN PROCESS" />
+    <node id="TECHNOLOGICAL CHANGE" />
+    <node id="GLOBAL INTERCONNECTION" />
+    <node id="ARCHITECT" />
+    <node id="DATA ENGINEER" />
+    <node id="CULTURAL IDENTITY" />
+    <node id="COMMUNITY" />
+    <node id="MOTHER" />
+    <node id="FATHER" />
+    <node id="TECHNOLOGICAL INNOVATION" />
+    <node id="IQ TESTS" />
+    <node id="COVID-19 PANDEMIC" />
+    <node id="BROTHER" />
+    <node id="FREELANCE CONSULTANT" />
+    <node id="DEEP LEARNING" />
+    <node id="DATA SCIENCE" />
+    <node id="DEEP LEARNING ENGINEERING INSTRUCTOR" />
+    <node id="DATA ANALYTICS" />
+    <node id="DECISION SCIENCE" />
+    <node id="MACHINE LEARNING" />
+    <node id="MACHINE LEARNING ENGINEERING" />
+    <node id="ETHICAL CONSIDERATIONS IN AI DEVELOPMENT" />
+    <node id="DATABASE MANAGEMENT" />
+    <node id="DATA STORAGE TECHNIQUES" />
+    <node id="BATCH PIPELINE DEVELOPMENT" />
+    <node id="STRATEGIES FOR HANDLING DATA AT SCALE" />
+    <node id="KUALA LUMPUR" />
+    <node id="GLOBAL TECHNOLOGY COMPANY" />
+    <node id="AI" />
+    <node id="AI ETHICS" />
+    <node id="B2C" />
+    <node id="B2B" />
+    <node id="CLIENT TEAMS" />
+    <node id="INDIVIDUAL LEARNERS" />
+    <node id="AI APPLICATIONS" />
+    <node id="MULTIMODAL LEARNING" />
+    <node id="CONTROLLABLE GENERATION" />
+    <node id="COMPUTER VISION NEURAL NETWORKS" />
+    <node id="SUSTAINABLE ENERGY PRACTICES" />
+    <node id="SPANISH-LANGUAGE YOUTUBE CHANNEL" />
+    <node id="TWITTER" />
+    <node id="SUBJECT" />
+    <node id="YOUTUBE CHANNELS" />
+    <node id="AI CONFERENCES" />
+    <node id="WORKSHOPS" />
+    <node id="RESEARCH PAPERS" />
+    <node id="CHESS" />
+    <node id="BIOGRAPHIES" />
+    <node id="GAMING" />
+    <node id="GIRLFRIEND" />
+    <node id="TITIANA" />
+    <node id="KILLIAN" />
+    <node id="DAVY" />
+    <node id="PARENTS" />
+    <node id="DATA ENGINEERING" />
+    <node id="FRIENDS" />
+    <node id="SMART CITIES" />
+    <node id="TITIANNA" />
+    <node id="TITIAN" />
+    <node id="SUSTAINABLE ENERGY" />
+    <node id="LITERATURE" />
+    <node id="IQ SCORES" />
+    <node id="CAREER COUNSELING" />
+    <node id="ELECTRONIC ENGINEERING" />
+    <node id="BIOCHEMISTRY" />
+    <node id="300 M&#178; RESIDENTIAL HOUSE" />
+    <node id="COVID-19" />
+    <node id="FRANCE" />
+    <node id="AI-ASSISTED DESIGN" />
+    <node id="ARCHITECTURAL PROJECT MANAGEMENT" />
+    <node id="CAD AND BIM" />
+    <node id="AI TECHNOLOGY" />
+    <node id="INTERDISCIPLINARY THINKING" />
+    <node id="LIFELONG LEARNING" />
+    <node id="COMPUTATIONAL THINKING" />
+    <node id="DATA-DRIVEN DESIGN" />
+    <node id="OPTIMIZATION TECHNIQUES" />
+    <node id="DESIGN MANAGER" />
+    <node id="CIRCULAR ECONOMY INITIATIVES" />
+    <node id="HACKATHONS" />
+    <node id="TECH MEETUPS" />
+    <node id="STARTUP CULTURE" />
+    <node id="FINTECH INNOVATION" />
+    <node id="SMART CITY INITIATIVES" />
+    <node id="MOBILE WORLD CONGRESS" />
+    <node id="DATA SCIENCE &amp; AI" />
+    <node id="3D GENERATIVE ADVERSARIAL NETWORKS (GANS)" />
+    <node id="ARCHITECTURAL TRAINING" />
+    <node id="AI SOLUTIONS" />
+    <node id="UAE" />
+    <node id="AI CONSULTING" />
+    <node id="YOUTUBE CHANNEL" />
+    <node id="TECHNOLOGY" />
+    <node id="CULTURAL CONTEXTS" />
+    <edge source="JUAN GARASSINO" target="UNIVERSIDAD DE BUENOS AIRES">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="&#201;COLE NATIONALE SUP&#201;RIEURE D&#8217;ARCHITECTURE PARIS-MALAQUAIS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="LE WAGON">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="CAIDERA">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="AI FOR SMART CITIES">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="PROMPTPLOT">
+      <data key="d0">22.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="BIM DESIGN COORDINATOR">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="MACHINE-LEARNING-BASED URBANIST">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="DEEP LEARNING AND MLOPS INSTRUCTOR">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="TOKYO">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="DEEPSCULPT">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="BUENOS AIRES">
+      <data key="d0">35.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="BERLIN">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="LAMAINDEX">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="GANS">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="PPO AGENTS">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="SPAIN">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="TECHNICAL ARTICLES">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="ARGENTINA">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="ITALY">
+      <data key="d0">11.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="UNIVERSITY OF BUENOS AIRES">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="PHYSICS">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="MATHEMATICS">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="CHEMISTRY">
+      <data key="d0">12.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="BIOLOGY">
+      <data key="d0">12.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="HISTORY">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="GEOGRAPHY">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="SUSTAINABILITY">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="HEALTHCARE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="ARCHITECTURE">
+      <data key="d0">26.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="ARTIFICIAL INTELLIGENCE">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="EUROPE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="MIDDLE EAST">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="ASIA">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="CULTURAL INTELLIGENCE">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="MOTHER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="FATHER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="LITERATURE">
+      <data key="d0">3.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="IQ SCORES">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="CAREER COUNSELING">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="ELECTRONIC ENGINEERING">
+      <data key="d0">4.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="BIOCHEMISTRY">
+      <data key="d0">4.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="PARIS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="NEW ZEALAND">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="GERMANY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="AI">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="AI TECHNOLOGY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="INTERDISCIPLINARY THINKING">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="LIFELONG LEARNING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="SYSTEMS THINKING">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="HUMAN-CENTERED DESIGN">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="COMPUTATIONAL THINKING">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="DATA-DRIVEN DESIGN">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="JUAN GARASSINO" target="OPTIMIZATION TECHNIQUES">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="UNIVERSIDAD DE BUENOS AIRES" target="BUENOS AIRES">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="LE WAGON" target="BERLIN">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="LE WAGON" target="JUAN">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="LE WAGON" target="COVID-19 PANDEMIC">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="LE WAGON" target="FREELANCE CONSULTANT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="LE WAGON" target="DEEP LEARNING">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="LE WAGON" target="DATA SCIENCE">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="LE WAGON" target="DEEP LEARNING ENGINEERING INSTRUCTOR">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="LE WAGON" target="DATA ANALYTICS">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="LE WAGON" target="DECISION SCIENCE">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="LE WAGON" target="MACHINE LEARNING">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="LE WAGON" target="MACHINE LEARNING ENGINEERING">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="LE WAGON" target="GENERATIVE AI">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="LE WAGON" target="ETHICAL CONSIDERATIONS IN AI DEVELOPMENT">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="LE WAGON" target="DATABASE MANAGEMENT">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="LE WAGON" target="DATA STORAGE TECHNIQUES">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="LE WAGON" target="BATCH PIPELINE DEVELOPMENT">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="LE WAGON" target="STRATEGIES FOR HANDLING DATA AT SCALE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="LE WAGON" target="DATA SCIENCE &amp; AI">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="LE WAGON" target="DATA ENGINEERING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CAIDERA" target="BERLIN">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CAIDERA" target="JUAN">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="TOKYO" target="JUAN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TOKYO" target="FREELANCE CONSULTANT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="TOKYO" target="SINGAPORE">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="BUENOS AIRES" target="JUAN">
+      <data key="d0">26.0</data>
+    </edge>
+    <edge source="BUENOS AIRES" target="ARGENTINA">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BUENOS AIRES" target="UNIVERSITY OF BUENOS AIRES">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BUENOS AIRES" target="COMMUNITY">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="BUENOS AIRES" target="GERMANY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BUENOS AIRES" target="BROTHER">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="BUENOS AIRES" target="SUBJECT">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="BERLIN" target="JUAN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BERLIN" target="GERMAN RESEARCH CENTER FOR ARTIFICIAL INTELLIGENCE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BERLIN" target="FREELANCE CONSULTANT">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="BERLIN" target="SUBJECT">
+      <data key="d0">12.0</data>
+    </edge>
+    <edge source="BERLIN" target="AI">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BERLIN" target="UNIVERSITY OF BUENOS AIRES">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="BERLIN" target="&#201;COLE DES BEAUX-ARTS MALACHAIS">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="BERLIN" target="AMSTERDAM">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="BERLIN" target="LONDON">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="BERLIN" target="SMART CITIES">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="ARGENTINA" target="RIO DE LA PLATA">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ARGENTINA" target="ARCHITECT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="ARGENTINA" target="DATA ENGINEER">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="ARGENTINA" target="CULTURAL IDENTITY">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="ARGENTINA" target="JUAN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="UNIVERSITY OF BUENOS AIRES" target="JUAN">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="UNIVERSITY OF BUENOS AIRES" target="&#201;COLE DES BEAUX-ARTS MALACHAIS">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="UNIVERSITY OF BUENOS AIRES" target="CHILE">
+      <data key="d0">4.0</data>
+    </edge>
+    <edge source="UNIVERSITY OF BUENOS AIRES" target="BRAZIL">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="UNIVERSITY OF BUENOS AIRES" target="NEW ZEALAND">
+      <data key="d0">12.0</data>
+    </edge>
+    <edge source="UNIVERSITY OF BUENOS AIRES" target="FREELANCE CONSULTANT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="PHYSICS" target="ARCHITECTURE">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="PHYSICS" target="SUBJECT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="PHYSICS" target="AI">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="HISTORY" target="SUBJECT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="UBA" target="JUAN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JUAN" target="&#201;COLE DES BEAUX-ARTS MALACHAIS">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="JUAN" target="GALPON STUDIO">
+      <data key="d0">13.0</data>
+    </edge>
+    <edge source="JUAN" target="KIRI TE KANAWA THEATRE">
+      <data key="d0">20.0</data>
+    </edge>
+    <edge source="JUAN" target="AOTEA CENTRE">
+      <data key="d0">20.0</data>
+    </edge>
+    <edge source="JUAN" target="AUCKLAND COUNCIL BUILDINGS">
+      <data key="d0">20.0</data>
+    </edge>
+    <edge source="JUAN" target="AUCKLAND ART GALLERY">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="JUAN" target="CHILE">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="JUAN" target="BRAZIL">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="JUAN" target="NEW ZEALAND">
+      <data key="d0">28.0</data>
+    </edge>
+    <edge source="JUAN" target="FRENCH">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="JUAN" target="MORPHOLOGY">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="JUAN" target="GERMANY">
+      <data key="d0">22.0</data>
+    </edge>
+    <edge source="JUAN" target="2018">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="JUAN" target="AMSTERDAM">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JUAN" target="LONDON">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JUAN" target="BARCELONA">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="JUAN" target="UNITED ARAB EMIRATES">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JUAN" target="MALAYSIA">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="JUAN" target="SINGAPORE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JUAN" target="JAPAN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JUAN" target="LLAMAINDEX">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="JUAN" target="SMART NATION INITIATIVE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="JUAN" target="3D AI FOR ARCHITECTURE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="JUAN" target="SMART CITIES PROJECTS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JUAN" target="MULTIAGENT SYSTEMS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JUAN" target="COGNITIVE AGENTS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="JUAN" target="DEEP LEARNING PIPELINES">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="JUAN" target="GENERATIVE AI">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="JUAN" target="PARIS">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="JUAN" target="300 M&#178; RESIDENTIAL HOUSE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JUAN" target="COVID-19">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="JUAN" target="MACHINE LEARNING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JUAN" target="DEEP LEARNING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="JUAN" target="FRANCE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="JUAN" target="AI-ASSISTED DESIGN">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="JUAN" target="ARCHITECTURAL PROJECT MANAGEMENT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="JUAN" target="CAD AND BIM">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="&#201;COLE DES BEAUX-ARTS MALACHAIS" target="PARIS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="&#201;COLE DES BEAUX-ARTS MALACHAIS" target="FRENCH">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="KIRI TE KANAWA THEATRE" target="NEW ZEALAND">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="AOTEA CENTRE" target="NEW ZEALAND">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="AUCKLAND COUNCIL BUILDINGS" target="NEW ZEALAND">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="AUCKLAND ART GALLERY" target="NEW ZEALAND">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="NEW ZEALAND" target="GERMANY">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="NEW ZEALAND" target="DESIGN MANAGER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="GERMANY" target="COVID-19 PANDEMIC">
+      <data key="d0">11.0</data>
+    </edge>
+    <edge source="AMSTERDAM" target="NETHERLANDS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="AMSTERDAM" target="FREELANCE CONSULTANT">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="AMSTERDAM" target="LONDON">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="AMSTERDAM" target="CIRCULAR ECONOMY INITIATIVES">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="LONDON" target="UNITED ARAB EMIRATES">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="LONDON" target="FREELANCE CONSULTANT">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="LONDON" target="BARCELONA">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="LONDON" target="ABU DHABI">
+      <data key="d0">4.0</data>
+    </edge>
+    <edge source="LONDON" target="FINTECH INNOVATION">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="BARCELONA" target="FREELANCE CONSULTANT">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="BARCELONA" target="SINGAPORE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BARCELONA" target="SMART CITY INITIATIVES">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="UNITED ARAB EMIRATES" target="DUBAI">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="SINGAPORE" target="SMART NATION INITIATIVE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SINGAPORE" target="FREELANCE CONSULTANT">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="SINGAPORE" target="KUALA LUMPUR">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="SINGAPORE" target="SMART CITY INITIATIVES">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="SINGAPORE" target="SMART CITIES">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="SINGAPORE" target="SUBJECT">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="DUBAI" target="FREELANCE CONSULTANT">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="DUBAI" target="ABU DHABI">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="DUBAI" target="SMART CITY INITIATIVES">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="DUBAI" target="SMART CITIES">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="ABU DHABI" target="MOHAMED BIN ZAYED UNIVERSITY OF ARTIFICIAL INTELLIGENCE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="ABU DHABI" target="FREELANCE CONSULTANT">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="3D AI FOR ARCHITECTURE" target="AI">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="3D AI FOR ARCHITECTURE" target="SMART CITIES">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="GENERATIVE AI" target="FREELANCE CONSULTANT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ARCHITECTURE" target="SYSTEMS THINKING">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="ARCHITECTURE" target="HUMAN-CENTERED DESIGN">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="ARCHITECTURE" target="ITERATIVE DESIGN PROCESS">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="ARCHITECTURE" target="IQ TESTS">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="ARCHITECTURE" target="FREELANCE CONSULTANT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="ARCHITECTURE" target="AI">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="EUROPE" target="AI">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="MIDDLE EAST" target="AI">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="ASIA" target="AI">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CULTURAL INTELLIGENCE" target="FREELANCE CONSULTANT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="TECHNOLOGICAL CHANGE" target="GLOBAL INTERCONNECTION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ARCHITECT" target="MOTHER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DATA ENGINEER" target="FATHER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DATA ENGINEER" target="TECHNOLOGICAL INNOVATION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="COVID-19 PANDEMIC" target="DEEP LEARNING ENGINEERING INSTRUCTOR">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="COVID-19 PANDEMIC" target="BROTHER">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="BROTHER" target="SUBJECT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BROTHER" target="AI">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="FREELANCE CONSULTANT" target="KUALA LUMPUR">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="FREELANCE CONSULTANT" target="3D GENERATIVE ADVERSARIAL NETWORKS (GANS)">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FREELANCE CONSULTANT" target="SMART CITIES">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FREELANCE CONSULTANT" target="DEEP LEARNING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FREELANCE CONSULTANT" target="ARCHITECTURAL TRAINING">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="FREELANCE CONSULTANT" target="AI SOLUTIONS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DEEP LEARNING" target="DEEP LEARNING ENGINEERING INSTRUCTOR">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="DEEP LEARNING" target="AI">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DEEP LEARNING ENGINEERING INSTRUCTOR" target="GLOBAL TECHNOLOGY COMPANY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DEEP LEARNING ENGINEERING INSTRUCTOR" target="MACHINE LEARNING">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="DEEP LEARNING ENGINEERING INSTRUCTOR" target="AI">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DEEP LEARNING ENGINEERING INSTRUCTOR" target="AI ETHICS">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="DEEP LEARNING ENGINEERING INSTRUCTOR" target="B2C">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="DEEP LEARNING ENGINEERING INSTRUCTOR" target="B2B">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DEEP LEARNING ENGINEERING INSTRUCTOR" target="CLIENT TEAMS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DEEP LEARNING ENGINEERING INSTRUCTOR" target="INDIVIDUAL LEARNERS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="DEEP LEARNING ENGINEERING INSTRUCTOR" target="AI APPLICATIONS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DEEP LEARNING ENGINEERING INSTRUCTOR" target="MULTIMODAL LEARNING">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="DEEP LEARNING ENGINEERING INSTRUCTOR" target="CONTROLLABLE GENERATION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DEEP LEARNING ENGINEERING INSTRUCTOR" target="SPANISH-LANGUAGE YOUTUBE CHANNEL">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="DEEP LEARNING ENGINEERING INSTRUCTOR" target="GIRLFRIEND">
+      <data key="d0">4.0</data>
+    </edge>
+    <edge source="KUALA LUMPUR" target="MOBILE WORLD CONGRESS">
+      <data key="d0">4.0</data>
+    </edge>
+    <edge source="GLOBAL TECHNOLOGY COMPANY" target="COMPUTER VISION NEURAL NETWORKS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="GLOBAL TECHNOLOGY COMPANY" target="SUSTAINABLE ENERGY PRACTICES">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="AI" target="SPANISH-LANGUAGE YOUTUBE CHANNEL">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="AI" target="SUBJECT">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="AI" target="PARENTS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="AI" target="DATA ENGINEERING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="AI" target="GIRLFRIEND">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="AI" target="FRIENDS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="AI" target="SMART CITIES">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="AI" target="CHESS">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="AI" target="TITIANNA">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="AI" target="KILLIAN">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="AI" target="DAVY">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="AI" target="SUSTAINABLE ENERGY">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="AI" target="DESIGN MANAGER">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="AI" target="HACKATHONS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="AI" target="TECH MEETUPS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="AI" target="STARTUP CULTURE">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="TWITTER" target="SUBJECT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SUBJECT" target="YOUTUBE CHANNELS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SUBJECT" target="AI CONFERENCES">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SUBJECT" target="WORKSHOPS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SUBJECT" target="RESEARCH PAPERS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SUBJECT" target="CHESS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SUBJECT" target="BIOGRAPHIES">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SUBJECT" target="GAMING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="SUBJECT" target="GIRLFRIEND">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="SUBJECT" target="TITIANA">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="SUBJECT" target="KILLIAN">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="SUBJECT" target="DAVY">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="SUBJECT" target="PARENTS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SUBJECT" target="DATA ENGINEERING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="SUBJECT" target="UAE">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="SUBJECT" target="AI CONSULTING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SUBJECT" target="YOUTUBE CHANNEL">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="SUBJECT" target="TECHNOLOGY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SUBJECT" target="CULTURAL CONTEXTS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="GIRLFRIEND" target="TITIAN">
+      <data key="d0">3.0</data>
+    </edge>
+    <edge source="GIRLFRIEND" target="KILLIAN">
+      <data key="d0">3.0</data>
+    </edge>
+    <edge source="GIRLFRIEND" target="DAVY">
+      <data key="d0">1.0</data>
+    </edge>
+  </graph>
+</graphml>

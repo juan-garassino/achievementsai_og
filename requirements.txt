@@ -1,35 +1,43 @@
-chromadb
+# chromadb
+# streamlit
+# watchdog
+# llama_index
+# llama-index-vector-stores-chroma
+# llama-index-embeddings-huggingface
+# #llama-index-llms-ollama
+# llama-index-llms-anthropic # theres one for each LLM
+# langchain-community
+
+# pysqlite3-binary
+
+# # supervisor
+# # accelerate
+
+# # sentence_transformers
+# # llama-index-embeddings-langchain
+# # llama-index-llms-huggingface
+# # langchain-core
+# # langchain
+# # sentence-transformers
+# # transformers
+# # spacy
+
+# llama-index
+# langchain
+# openai
+# pypdf
+# ipython-ngql
+# nebula3-python
+# networkx
+# pyvis
+# ipython-ngql
+
+# llama-index-llms-azure-inference
+
 streamlit
 watchdog
 llama_index
-llama-index-vector-stores-chroma
-llama-index-embeddings-huggingface
-#llama-index-llms-ollama
-llama-index-llms-anthropic # theres one for each LLM
-langchain-community
-
-pysqlite3-binary
-
-# supervisor
-# accelerate
-
-# sentence_transformers
-# llama-index-embeddings-langchain
-# llama-index-llms-huggingface
-# langchain-core
-# langchain
-# sentence-transformers
-# transformers
-# spacy
-
-llama-index
-langchain
-openai
-pypdf
-ipython-ngql
-nebula3-python
-networkx
-pyvis
-ipython-ngql
-
-llama-index-llms-azure-inference
+llama-index-graph-stores-neo4j
+llama-index-llms-azure-openai
+llama-index-embeddings-azure-openai
+llama-index-vector-stores-pinecone
