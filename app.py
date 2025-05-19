@@ -1,3 +1,4 @@
+
 import os
 import streamlit as st
 from PIL import Image
@@ -67,7 +68,7 @@ st.sidebar.markdown(
 st.sidebar.markdown("### 5. Testimonial")
 st.sidebar.markdown(
     """
-> “In a short time, Mr. Garassino has shown remarkable adaptability and leadership, teaching around the globe and driving impact in B2B and B2C programs.”  
+> "In a short time, Mr. Garassino has shown remarkable adaptability and leadership, teaching around the globe and driving impact in B2B and B2C programs."  
 > **– Titiana Benassi, People Manager @ Le Wagon**
 """
 )
@@ -232,8 +233,13 @@ def load_agent():
 
 agent = load_agent()
 
-# ----- Chat Interface -----
-# Initialize session state for messages
+# ----- Streamlit UI Main Content -----
+st.title("Chat with Juan's Curriculum 🤓")
+st.write(
+    "Welcome to my AI-powered chatbot! I designed this app to answer questions about my professional background. Feel free to use the chat to interact with my curriculum. If you have further questions after the chat, let's organize a meeting - I'll be happy to answer the rest of them!"
+)
+
+# Initialize session state
 if 'messages' not in st.session_state:
     st.session_state.messages = [
         {"role": "assistant", "content": (
@@ -243,10 +249,41 @@ if 'messages' not in st.session_state:
         )}
     ]
 
-# Render chat history
+if "button_pressed" not in st.session_state:
+    st.session_state.button_pressed = False
+if "last_question" not in st.session_state:
+    st.session_state.last_question = ""
+
+# Display chat messages
 for msg in st.session_state.messages:
     with st.chat_message(msg['role']):
         st.write(msg['content'])
+
+# If there are no messages except the initial greeting, show suggested questions
+if len(st.session_state.messages) <= 1 and not st.session_state.button_pressed:
+    suggested_questions = [
+        "Can you describe Juan Garassino's skills in machine learning?",
+        "What can you share about Juan's early years?",
+        "How might Juan's experience as a ML Instructor benefit our company?",
+        "What was Juan's role while he lived in New Zealand?",
+        "Would Juan be a strong fit for our Generative AI team?",
+    ]
+
+    for question in suggested_questions:
+        if st.button(question):
+            st.session_state.button_pressed = True
+            st.session_state.last_question = question
+            st.rerun()
+
+# If a button was just pressed, process the query
+if st.session_state.button_pressed:
+    st.session_state.messages.append({"role": "user", "content": st.session_state.last_question})
+    with st.chat_message("assistant"):
+        response = agent.chat(st.session_state.last_question)
+        st.write(response)
+    st.session_state.messages.append({"role": "assistant", "content": response})
+    st.session_state.button_pressed = False
+    st.session_state.last_question = ""
 
 # Handle user input
 if prompt := st.chat_input("Ask me about Juan…"):
