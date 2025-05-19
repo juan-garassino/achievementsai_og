@@ -1,2 +1,4 @@
 .env
 notebooks/
+boilerplates/
+.streamlit/
