@@ -4,3 +4,6 @@ achievements_ai_graphrag/
 notebooks/
 boilerplates/
 .streamlit/
+# junk
+.DS_Store
+*.log
