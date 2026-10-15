@@ -117,15 +117,6 @@ NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD") or st.secrets["NEO4J"]["NEO4J_PASSW
 NEO4J_URI = os.getenv("NEO4J_CONNECTION_URI") or st.secrets["NEO4J"]["NEO4J_CONNECTION_URI"]
 GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD") or st.secrets["GMAIL_APP_PASSWORD"]["GMAIL_APP_PASSWORD"]
 
-print("AZ_API_KEY", AZ_API_KEY[0:5])
-print("AZ_LLM_EP", AZ_LLM_EP[0:5])
-print("AZ_EMB_EP", AZ_EMB_EP[0:5])
-print("AZ_API_VER", AZ_API_VER[0:5])
-print("PINECONE_KEY", PINECONE_KEY[0:5])
-print("NEO4J_USERNAME", NEO4J_USERNAME[0:5])
-print("NEO4J_PASSWORD", NEO4J_PASSWORD[0:5])
-print("NEO4J_URI", NEO4J_URI[0:5])
-print("GMAIL_APP_PASSWORD", GMAIL_APP_PASSWORD[0:5])
 
 # ----- Agent Initialization and Tooling -----
 from llama_index.graph_stores.neo4j import Neo4jPropertyGraphStore
@@ -138,9 +129,7 @@ from llama_index.core.tools import QueryEngineTool, ToolMetadata, FunctionTool
 from llama_index.core.memory import ChatMemoryBuffer
 from llama_index.core.agent import ReActAgent
 import nest_asyncio
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+from email_tool import send_gmail as _send_owner_email
 
 # Apply asyncio patch for Jupyter compatibility
 nest_asyncio.apply()
@@ -187,19 +176,9 @@ vector_index = VectorStoreIndex.from_vector_store(vector_store)
 
 # Function for sending email
 
-def send_gmail(to_email: str, subject: str, message: str) -> str:
-    sender = "achievements.ai.backend@gmail.com"
-    app_pass = GMAIL_APP_PASSWORD
-    msg = MIMEMultipart()
-    msg['From'] = sender
-    msg['To'] = to_email
-    msg['Subject'] = subject
-    msg.attach(MIMEText(message, 'plain'))
-    with smtplib.SMTP('smtp.gmail.com', 587) as server:
-        server.starttls()
-        server.login(sender, app_pass)
-        server.send_message(msg)
-    return "Email sent successfully!"
+def send_gmail(subject: str, message: str) -> str:
+    """Send a message to Juan. The recipient is fixed (see email_tool.py)."""
+    return _send_owner_email(subject, message, app_password=GMAIL_APP_PASSWORD)
 
 # Create query-engine tools
 vector_qe = vector_index.as_query_engine()
@@ -223,12 +202,10 @@ tools = [
     FunctionTool.from_defaults(
         fn=send_gmail,
         name="send_gmail",
-        description="Send an email via Gmail to Juan.",
+        description="Send an email to Juan (the recipient is always Juan; include the visitor's contact details in the message).",
     ),
 ]
 
-# Chat memory buffer
-memory = ChatMemoryBuffer.from_defaults(token_limit=3900)
 
 # System prompt for the agent
 SYSTEM_PROMPT = (
@@ -239,18 +216,20 @@ SYSTEM_PROMPT = (
     "Introduce your capabilities on first interaction and suggest using tools."
 )
 
-# Cache the agent instantiation
-@st.cache_resource(show_spinner=False)
+# One agent (and chat memory) per browser session: a cache_resource agent would
+# share its ChatMemoryBuffer, i.e. one visitor's conversation, with every visitor.
 def load_agent():
     return ReActAgent.from_tools(
         tools,
         llm=llm,
         verbose=True,
         system_prompt=SYSTEM_PROMPT,
-        memory=memory,
+        memory=ChatMemoryBuffer.from_defaults(token_limit=3900),
     )
 
-agent = load_agent()
+if "agent" not in st.session_state:
+    st.session_state.agent = load_agent()
+agent = st.session_state.agent
 
 # ----- Streamlit UI Main Content -----
 st.title("Chat with Juan's Curriculum 🤓")
@@ -300,7 +279,7 @@ if st.session_state.button_pressed:
     with st.chat_message("assistant"):
         response = agent.chat(st.session_state.last_question)
         st.write(response.response)
-    st.session_state.messages.append({"role": "assistant", "content": response})
+    st.session_state.messages.append({"role": "assistant", "content": response.response})
     st.session_state.button_pressed = False
     st.session_state.last_question = ""
 
@@ -310,4 +289,4 @@ if prompt := st.chat_input("Ask me about Juan…"):
     with st.chat_message("assistant"):
         response = agent.chat(prompt)
         st.write(response.response)
-    st.session_state.messages.append({"role": "assistant", "content": response})
+    st.session_state.messages.append({"role": "assistant", "content": response.response})
