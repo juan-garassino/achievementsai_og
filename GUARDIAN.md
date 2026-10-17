@@ -6,7 +6,7 @@ Automated security & bug guardian for this repo. Branch: `claude/guardian`.
 
 | Area | Command |
 |---|---|
-| Dependencies | `pip-audit -r requirements.txt` (resolves unpinned deps, incl. transitive) |
+| Dependencies | `pip-audit -r requirements.lock --no-deps` (full pinned set); `requirements.txt` pins direct deps and applies the lock via `-c requirements.lock` |
 | Static analysis | `bandit -r .` + manual grep for eval/exec, pickle/joblib loads, yaml.load, `shell=True`, `verify=False`, CORS/XSRF, 0.0.0.0 servers |
 | Secrets (history) | `gitleaks detect --source . --redact -v` |
 | Secrets (tree) | `gitleaks detect --no-git --source . --redact` + `git ls-files \| grep -i env` |
@@ -39,7 +39,7 @@ Automated security & bug guardian for this repo. Branch: `claude/guardian`.
 | G-020 | low | `st.image(use_container_width=...)` deprecated, scheduled for removal | achievements_streamlit.py | fixed (`width="stretch"`) | 2026-10-17 |
 | G-013 | low | `pillow` / `nest_asyncio` imported directly but only installed transitively | requirements.txt | fixed | 2026-10-17 |
 | G-007 | medium | Transitive dep `nltk` (via llama-index-core) has advisory PYSEC-2026-3740, no fix version published | requirements.txt | open (re-checked 2026-10-17: nltk 3.10.3, still no fix) | 2026-10-15 |
-| G-008 | low | `requirements.txt` fully unpinned (non-reproducible, supply-chain drift) | requirements.txt | open | 2026-10-15 |
+| G-008 | low | `requirements.txt` fully unpinned (non-reproducible, supply-chain drift; caused G-019) | requirements.txt, requirements.lock | fixed 2026-10-17 (direct pins + 107-package constraints lock, identical to the smoke-tested set) | 2026-10-15 |
 | G-009 | low | `.joblib` (pickle) model files tracked; unused by the app, unsafe to load if untrusted | models_store/ | open | 2026-10-15 |
 
 Secrets: gitleaks found 0 findings in history and tree (re-run 2026-10-17, 47 commits, all branches); `.env.sample` holds keys only, no values.
@@ -56,14 +56,17 @@ Secrets: gitleaks found 0 findings in history and tree (re-run 2026-10-17, 47 co
 | lint errors (pyflakes) / bandit | 5 / - | 0 / 0 | 0 / 0 | 0 / 0 |
 | app runs on fresh install | unknown | unknown | unknown | yes (AppTest smoke) |
 
+After pass 3 (G-008 pinned): open vulns 0/0/1/1, tests 29, failing 0, lint 0.
+
 (Run #2 baseline counts G-011/G-012 as newly found: 0/0/3/4 -> 0/0/1/2.)
 
 ## Backlog
 
-- Pin `requirements.txt` (or adopt a lock file) and re-run pip-audit; bump `nltk` when a fix ships (G-007, G-008).
+- Bump `nltk` in requirements.lock when a fix ships (G-007).
 - Remove or document `models_store/*.joblib` (G-009).
 - Limits are per process; with several replicas, put a per-IP limit at the reverse proxy as well.
-- Pin `requirements.txt` to the versions the smoke test passed with (llama-index-core 0.14.25, streamlit 1.66.0, ...) so the next major llama-index change can't break the app silently (G-008).
+- Bump the lock deliberately (fresh venv, `pip install -r requirements.txt` without `-c`, re-run smoke test + pip-audit, `pip freeze` into requirements.lock); nltk fix for G-007 lands that way.
+- Lock was resolved on Linux / Python 3.11; constraints don't force platform-only packages, but re-verify if the host Python changes.
 - Chat UI does not render the user's message until the next rerun (append-only); minor UX.
 - No CI workflow (needs a token with workflow scope; see Ideas).
 
@@ -81,7 +84,7 @@ Secrets: gitleaks found 0 findings in history and tree (re-run 2026-10-17, 47 co
 2. Add a GitHub Actions workflow (pinned SHAs, `permissions: contents: read`) running pytest + pyflakes + gitleaks.
 3. Done (run #2, G-018).
 4. Done (run #2, `chat_guard.py`).
-5. Generate a `requirements.lock` (pip-compile/uv) from the smoke-tested venv and run pip-audit against it in CI.
+5. Add hashes to the lock (`pip-compile --generate-hashes` / `uv pip compile`) and run pip-audit on it in CI.
 6. Smoke-test the email tool path: fake LLM emitting a ReAct `Action: send_gmail`, assert SMTP mock called once and rate limit honoured.
 
 ## Log
@@ -90,3 +93,4 @@ Secrets: gitleaks found 0 findings in history and tree (re-run 2026-10-17, 47 co
 
 - 2026-10-17 run #2: no PR review comments, no CI configured. Re-ran pip-audit (nltk still unfixed), bandit (0), gitleaks (0, history + tree), pyflakes (0). Added email rate limiting (G-011), per-session LLM turn cap (G-012), explicit pillow/nest_asyncio deps (G-013), agent verbose logging off (G-014). Tests 9 -> 16, all passing.
 - 2026-10-17 run #2 (pass 2): installed the app deps and added a Streamlit AppTest smoke test with a fake LLM; it showed the app crashes on a fresh install (G-019, llama-index 0.14 removed `from_tools`/`.chat`), fixed via the workflow agent + adapter. Moved turns into `chat_guard.py` with a process-wide cap (G-015) and generic error messages (G-016, G-017); backends built once per process (G-018); deprecated Streamlit arg (G-020). Tests 16 -> 28.
+- 2026-10-17 run #2 (pass 3): pinned direct deps in requirements.txt and added `requirements.lock` (constraints, 107 pins, identical to the smoke-tested venv; `pip check` clean) (G-008). pip-audit on the lock: only nltk PYSEC-2026-3740 (no fix). Tests 28 -> 29.

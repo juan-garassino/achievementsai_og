@@ -108,9 +108,31 @@ def test_requirements_lines_are_valid():
     # Each requirement must be one package per line (a missing newline once merged two names).
     import re
     for line in open("requirements.txt", encoding="utf-8").read().splitlines():
-        assert re.fullmatch(r"[A-Za-z0-9_.\-\[\]<>=!~, ]+", line.strip()), line
+        assert line.strip() == "-c requirements.lock" or re.fullmatch(r"[A-Za-z0-9_.\-\[\]<>=!~, ]+", line.strip()), line
     names = open("requirements.txt", encoding="utf-8").read().split()
-    assert "pillow" in names and "nest_asyncio" in names
+    assert any(n.startswith("pillow") for n in names) and any(n.startswith("nest_asyncio") for n in names)
+
+
+def _pins(path):
+    import re
+    out = {}
+    for line in open(path, encoding="utf-8").read().splitlines():
+        m = re.fullmatch(r"([A-Za-z0-9_.\-]+)==([^\s;]+)", line.strip())
+        if m:
+            out[re.sub(r"[-_.]+", "-", m.group(1)).lower()] = m.group(2)
+    return out
+
+
+def test_requirements_pinned_and_consistent_with_lock():
+    # G-008: unpinned deps silently pulled a breaking llama-index (G-019).
+    lines = [l.strip() for l in open("requirements.txt", encoding="utf-8") if l.strip()]
+    direct = [l for l in lines if not l.startswith("-")]
+    assert "-c requirements.lock" in lines
+    assert all("==" in l for l in direct), direct
+    req, lock = _pins("requirements.txt"), _pins("requirements.lock")
+    assert len(req) == len(direct) and len(lock) > len(req)
+    for name, ver in req.items():
+        assert lock.get(name) == ver, name
 
 
 def test_app_caps_llm_turns_per_session():
