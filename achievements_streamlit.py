@@ -1,4 +1,5 @@
 import os
+import uuid
 import streamlit as st
 from PIL import Image
 
@@ -15,7 +16,7 @@ st.set_page_config(
 
 # Sidebar content
 st.sidebar.title("About This App")
-st.sidebar.image(Image.open(IMAGE_PATH), use_container_width=True)
+st.sidebar.image(Image.open(IMAGE_PATH), width="stretch")
 
 st.sidebar.markdown(
     """
@@ -117,15 +118,6 @@ NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD") or st.secrets["NEO4J"]["NEO4J_PASSW
 NEO4J_URI = os.getenv("NEO4J_CONNECTION_URI") or st.secrets["NEO4J"]["NEO4J_CONNECTION_URI"]
 GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD") or st.secrets["GMAIL_APP_PASSWORD"]["GMAIL_APP_PASSWORD"]
 
-print("AZ_API_KEY", AZ_API_KEY[0:5])
-print("AZ_LLM_EP", AZ_LLM_EP[0:5])
-print("AZ_EMB_EP", AZ_EMB_EP[0:5])
-print("AZ_API_VER", AZ_API_VER[0:5])
-print("PINECONE_KEY", PINECONE_KEY[0:5])
-print("NEO4J_USERNAME", NEO4J_USERNAME[0:5])
-print("NEO4J_PASSWORD", NEO4J_PASSWORD[0:5])
-print("NEO4J_URI", NEO4J_URI[0:5])
-print("GMAIL_APP_PASSWORD", GMAIL_APP_PASSWORD[0:5])
 
 # ----- Agent Initialization and Tooling -----
 from llama_index.graph_stores.neo4j import Neo4jPropertyGraphStore
@@ -136,70 +128,70 @@ from llama_index.vector_stores.pinecone import PineconeVectorStore
 from llama_index.core import VectorStoreIndex
 from llama_index.core.tools import QueryEngineTool, ToolMetadata, FunctionTool
 from llama_index.core.memory import ChatMemoryBuffer
-from llama_index.core.agent import ReActAgent
+from llama_index.core.agent.workflow import ReActAgent
 import nest_asyncio
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+from email_tool import send_gmail as _send_owner_email
+import chat_guard
 
 # Apply asyncio patch for Jupyter compatibility
 nest_asyncio.apply()
 
-# Initialize LLM and Embeddings
-llm = AzureOpenAI(
-    model="gpt-4o-mini",
-    deployment_name="gpt-4o-mini",
-    api_key=AZ_API_KEY,
-    azure_endpoint=AZ_LLM_EP,
-    api_version=AZ_API_VER,
-)
-embeddings = AzureOpenAIEmbedding(
-    model="text-embedding-3-large",
-    deployment_name="text-embedding-3-large",
-    api_key=AZ_API_KEY,
-    azure_endpoint=AZ_EMB_EP,
-    api_version=AZ_API_VER,
-)
+# Shared, read-only backends: built ONCE per process, not on every rerun
+# (each chat message reruns the script; rebuilding leaked Neo4j drivers).
+# Safe to share: no per-visitor state lives here (memory is per session below).
+@st.cache_resource(show_spinner=False)
+def load_backends():
+    # Initialize LLM and Embeddings
+    llm = AzureOpenAI(
+        model="gpt-4o-mini",
+        deployment_name="gpt-4o-mini",
+        api_key=AZ_API_KEY,
+        azure_endpoint=AZ_LLM_EP,
+        api_version=AZ_API_VER,
+    )
+    embeddings = AzureOpenAIEmbedding(
+        model="text-embedding-3-large",
+        deployment_name="text-embedding-3-large",
+        api_key=AZ_API_KEY,
+        azure_endpoint=AZ_EMB_EP,
+        api_version=AZ_API_VER,
+    )
+
+    # Neo4j Graph Index
+    neo4j_store = Neo4jPropertyGraphStore(
+        username=NEO4J_USERNAME,
+        password=NEO4J_PASSWORD,
+        url=NEO4J_URI,
+    )
+    graph_index = PropertyGraphIndex.from_existing(
+        property_graph_store=neo4j_store,
+        llm=llm,
+        embed_model=embeddings,
+    )
+
+
+    # Pinecone Vector Index
+    vector_store = PineconeVectorStore(
+        index_name="achievementsai",
+        namespace="achievementsai",
+        api_key=PINECONE_KEY
+    )
+
+    vector_index = VectorStoreIndex.from_vector_store(vector_store, embed_model=embeddings)
+    return llm, embeddings, graph_index, vector_index
+
+
+llm, embeddings, graph_index, vector_index = load_backends()
 Settings.llm = llm
 Settings.embed_model = embeddings
 
-# Neo4j Graph Index
-neo4j_store = Neo4jPropertyGraphStore(
-    username=NEO4J_USERNAME,
-    password=NEO4J_PASSWORD,
-    url=NEO4J_URI,
-)
-graph_index = PropertyGraphIndex.from_existing(
-    property_graph_store=neo4j_store,
-    llm=llm,
-    embed_model=embeddings,
-)
-
-
-# Pinecone Vector Index
-vector_store = PineconeVectorStore(
-    index_name="achievementsai",
-    namespace="achievementsai",
-    api_key=PINECONE_KEY
-)
-
-vector_index = VectorStoreIndex.from_vector_store(vector_store)
-
 # Function for sending email
 
-def send_gmail(to_email: str, subject: str, message: str) -> str:
-    sender = "achievements.ai.backend@gmail.com"
-    app_pass = GMAIL_APP_PASSWORD
-    msg = MIMEMultipart()
-    msg['From'] = sender
-    msg['To'] = to_email
-    msg['Subject'] = subject
-    msg.attach(MIMEText(message, 'plain'))
-    with smtplib.SMTP('smtp.gmail.com', 587) as server:
-        server.starttls()
-        server.login(sender, app_pass)
-        server.send_message(msg)
-    return "Email sent successfully!"
+def send_gmail(subject: str, message: str) -> str:
+    """Send a message to Juan. The recipient is fixed (see email_tool.py)."""
+    # Per-visitor id so email_tool can rate-limit each browser session.
+    sid = st.session_state.setdefault("session_id", uuid.uuid4().hex)
+    return _send_owner_email(subject, message, app_password=GMAIL_APP_PASSWORD, session_id=sid)
 
 # Create query-engine tools
 vector_qe = vector_index.as_query_engine()
@@ -223,12 +215,10 @@ tools = [
     FunctionTool.from_defaults(
         fn=send_gmail,
         name="send_gmail",
-        description="Send an email via Gmail to Juan.",
+        description="Send an email to Juan (the recipient is always Juan; include the visitor's contact details in the message).",
     ),
 ]
 
-# Chat memory buffer
-memory = ChatMemoryBuffer.from_defaults(token_limit=3900)
 
 # System prompt for the agent
 SYSTEM_PROMPT = (
@@ -239,18 +229,17 @@ SYSTEM_PROMPT = (
     "Introduce your capabilities on first interaction and suggest using tools."
 )
 
-# Cache the agent instantiation
-@st.cache_resource(show_spinner=False)
+# One agent (and chat memory) per browser session: a cache_resource agent would
+# share its ChatMemoryBuffer, i.e. one visitor's conversation, with every visitor.
 def load_agent():
-    return ReActAgent.from_tools(
-        tools,
-        llm=llm,
-        verbose=True,
-        system_prompt=SYSTEM_PROMPT,
-        memory=memory,
-    )
+    # llama-index >= 0.13 workflow agent (from_tools/.chat were removed); no
+    # verbose tracing, so visitor messages stay out of hosting logs.
+    agent = ReActAgent(tools=tools, llm=llm, system_prompt=SYSTEM_PROMPT, streaming=False)
+    return chat_guard.WorkflowChatAgent(agent, ChatMemoryBuffer.from_defaults(token_limit=3900))
 
-agent = load_agent()
+if "agent" not in st.session_state:
+    st.session_state.agent = load_agent()
+agent = st.session_state.agent
 
 # ----- Streamlit UI Main Content -----
 st.title("Chat with Juan's Curriculum 🤓")
@@ -272,6 +261,15 @@ if "button_pressed" not in st.session_state:
     st.session_state.button_pressed = False
 if "last_question" not in st.session_state:
     st.session_state.last_question = ""
+
+# LLM turns are rate-limited per session and process-wide (see chat_guard.py).
+def ask_agent(question: str) -> None:
+    sid = st.session_state.setdefault("session_id", uuid.uuid4().hex)
+    with st.chat_message("assistant"):
+        answer = chat_guard.answer(agent, question, sid)
+        st.write(answer)
+    st.session_state.messages.append({"role": "assistant", "content": answer})
+
 
 # Display chat messages
 for msg in st.session_state.messages:
@@ -297,17 +295,11 @@ if len(st.session_state.messages) <= 1 and not st.session_state.button_pressed:
 # If a button was just pressed, process the query
 if st.session_state.button_pressed:
     st.session_state.messages.append({"role": "user", "content": st.session_state.last_question})
-    with st.chat_message("assistant"):
-        response = agent.chat(st.session_state.last_question)
-        st.write(response.response)
-    st.session_state.messages.append({"role": "assistant", "content": response})
+    ask_agent(st.session_state.last_question)
     st.session_state.button_pressed = False
     st.session_state.last_question = ""
 
 # Handle user input
 if prompt := st.chat_input("Ask me about Juan…"):
     st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("assistant"):
-        response = agent.chat(prompt)
-        st.write(response.response)
-    st.session_state.messages.append({"role": "assistant", "content": response})
+    ask_agent(prompt)

@@ -7,3 +7,10 @@ boilerplates/
 # junk
 .DS_Store
 *.log
+
+# local tooling
+.venv/
+__pycache__/
+.pytest_cache/
+.coverage
+storage/
