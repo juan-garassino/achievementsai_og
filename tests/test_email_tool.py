@@ -73,3 +73,54 @@ def test_agent_memory_is_per_session_not_shared():
     assert "@st.cache_resource" not in src.split("def load_agent")[0].splitlines()[-1]
     assert "\nmemory = ChatMemoryBuffer" not in src
     assert "st.session_state.agent" in src
+
+
+def test_rate_limit_per_session(monkeypatch):
+    # G-011: a visitor could make the agent send unlimited emails (spam / quota abuse).
+    lim = email_tool.RateLimiter(per_key=2, global_max=100, window=3600)
+    assert lim.allow("a", now=0) and lim.allow("a", now=1)
+    assert not lim.allow("a", now=2)
+    assert lim.allow("b", now=2)
+    assert lim.allow("a", now=3602)  # window expired
+
+
+def test_rate_limit_global():
+    lim = email_tool.RateLimiter(per_key=10, global_max=2, window=3600)
+    assert lim.allow("a", now=0) and lim.allow("b", now=0)
+    assert not lim.allow("c", now=0)
+
+
+def test_send_refused_when_rate_limited(monkeypatch):
+    monkeypatch.setattr(email_tool, "LIMITER", email_tool.RateLimiter(per_key=1, global_max=10))
+    with mock.patch("email_tool.smtplib.SMTP") as smtp:
+        assert email_tool.send_gmail("s", "m", app_password="x", session_id="v") == "Email sent successfully!"
+        out = email_tool.send_gmail("s", "m", app_password="x", session_id="v")
+    assert "limit" in out.lower()
+    assert smtp.call_count == 1
+
+
+def test_app_passes_session_id_to_email_tool():
+    src = open("achievements_streamlit.py", encoding="utf-8").read()
+    assert "session_id=" in src
+
+
+def test_requirements_lines_are_valid():
+    # Each requirement must be one package per line (a missing newline once merged two names).
+    import re
+    for line in open("requirements.txt", encoding="utf-8").read().splitlines():
+        assert re.fullmatch(r"[A-Za-z0-9_.\-\[\]<>=!~, ]+", line.strip()), line
+    names = open("requirements.txt", encoding="utf-8").read().split()
+    assert "pillow" in names and "nest_asyncio" in names
+
+
+def test_app_caps_llm_turns_per_session():
+    # G-012: unbounded LLM calls per session (cost abuse on a public app).
+    src = open("achievements_streamlit.py", encoding="utf-8").read()
+    assert "MAX_TURNS_PER_SESSION" in src
+    assert "def ask_agent" in src and src.count("agent.chat(") == 1  # one guarded call site
+
+
+def test_agent_not_verbose():
+    # G-014: verbose ReAct traces dump visitor messages into hosting logs.
+    src = open("achievements_streamlit.py", encoding="utf-8").read()
+    assert "verbose=True" not in src

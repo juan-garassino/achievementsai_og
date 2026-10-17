@@ -1,4 +1,5 @@
 import os
+import uuid
 import streamlit as st
 from PIL import Image
 
@@ -178,7 +179,9 @@ vector_index = VectorStoreIndex.from_vector_store(vector_store)
 
 def send_gmail(subject: str, message: str) -> str:
     """Send a message to Juan. The recipient is fixed (see email_tool.py)."""
-    return _send_owner_email(subject, message, app_password=GMAIL_APP_PASSWORD)
+    # Per-visitor id so email_tool can rate-limit each browser session.
+    sid = st.session_state.setdefault("session_id", uuid.uuid4().hex)
+    return _send_owner_email(subject, message, app_password=GMAIL_APP_PASSWORD, session_id=sid)
 
 # Create query-engine tools
 vector_qe = vector_index.as_query_engine()
@@ -222,7 +225,7 @@ def load_agent():
     return ReActAgent.from_tools(
         tools,
         llm=llm,
-        verbose=True,
+        verbose=False,  # traces include visitor messages; keep them out of hosting logs
         system_prompt=SYSTEM_PROMPT,
         memory=ChatMemoryBuffer.from_defaults(token_limit=3900),
     )
@@ -252,6 +255,23 @@ if "button_pressed" not in st.session_state:
 if "last_question" not in st.session_state:
     st.session_state.last_question = ""
 
+# Cap LLM calls per browser session (cost abuse on a public app).
+MAX_TURNS_PER_SESSION = 30
+st.session_state.setdefault("turns", 0)
+
+
+def ask_agent(question: str) -> None:
+    with st.chat_message("assistant"):
+        if st.session_state.turns >= MAX_TURNS_PER_SESSION:
+            answer = ("This chat has reached its message limit. "
+                      "Please use the contact links in the sidebar to reach Juan.")
+        else:
+            st.session_state.turns += 1
+            answer = agent.chat(question).response
+        st.write(answer)
+    st.session_state.messages.append({"role": "assistant", "content": answer})
+
+
 # Display chat messages
 for msg in st.session_state.messages:
     with st.chat_message(msg['role']):
@@ -276,17 +296,11 @@ if len(st.session_state.messages) <= 1 and not st.session_state.button_pressed:
 # If a button was just pressed, process the query
 if st.session_state.button_pressed:
     st.session_state.messages.append({"role": "user", "content": st.session_state.last_question})
-    with st.chat_message("assistant"):
-        response = agent.chat(st.session_state.last_question)
-        st.write(response.response)
-    st.session_state.messages.append({"role": "assistant", "content": response.response})
+    ask_agent(st.session_state.last_question)
     st.session_state.button_pressed = False
     st.session_state.last_question = ""
 
 # Handle user input
 if prompt := st.chat_input("Ask me about Juan…"):
     st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("assistant"):
-        response = agent.chat(prompt)
-        st.write(response.response)
-    st.session_state.messages.append({"role": "assistant", "content": response.response})
+    ask_agent(prompt)
