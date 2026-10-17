@@ -5,6 +5,7 @@ visitor choose the recipient (that would turn the app's Gmail account into an
 open mail relay). The recipient is fixed to the owner's contact address and the
 subject is stripped of CR/LF to prevent header injection.
 """
+import logging
 import os
 import smtplib
 import threading
@@ -20,6 +21,9 @@ MAX_MESSAGE_LEN = 5000
 MAX_PER_SESSION = 3        # emails one visitor session may send per window
 MAX_GLOBAL = 20            # emails the whole process may send per window
 WINDOW_SECONDS = 3600
+SEND_FAILED_MESSAGE = "Sorry, the email could not be sent right now."
+
+log = logging.getLogger(__name__)
 
 
 class RateLimiter:
@@ -75,8 +79,13 @@ def send_gmail(subject: str, message: str, app_password: str | None = None,
     if not LIMITER.allow(session_id):
         return "Email rate limit reached; please try again later or use the contact links."
     msg = build_message(subject, message, sender, recipient)
-    with smtplib.SMTP("smtp.gmail.com", 587, timeout=30) as server:
-        server.starttls()
-        server.login(sender, password)
-        server.send_message(msg)
+    try:
+        with smtplib.SMTP("smtp.gmail.com", 587, timeout=30) as server:
+            server.starttls()
+            server.login(sender, password)
+            server.send_message(msg)
+    except (smtplib.SMTPException, OSError):
+        # Details (auth errors, server banners) stay in server logs, not the chat.
+        log.exception("send_gmail failed")
+        return SEND_FAILED_MESSAGE
     return "Email sent successfully!"

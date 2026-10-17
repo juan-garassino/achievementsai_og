@@ -16,7 +16,7 @@ st.set_page_config(
 
 # Sidebar content
 st.sidebar.title("About This App")
-st.sidebar.image(Image.open(IMAGE_PATH), use_container_width=True)
+st.sidebar.image(Image.open(IMAGE_PATH), width="stretch")
 
 st.sidebar.markdown(
     """
@@ -128,52 +128,62 @@ from llama_index.vector_stores.pinecone import PineconeVectorStore
 from llama_index.core import VectorStoreIndex
 from llama_index.core.tools import QueryEngineTool, ToolMetadata, FunctionTool
 from llama_index.core.memory import ChatMemoryBuffer
-from llama_index.core.agent import ReActAgent
+from llama_index.core.agent.workflow import ReActAgent
 import nest_asyncio
 from email_tool import send_gmail as _send_owner_email
+import chat_guard
 
 # Apply asyncio patch for Jupyter compatibility
 nest_asyncio.apply()
 
-# Initialize LLM and Embeddings
-llm = AzureOpenAI(
-    model="gpt-4o-mini",
-    deployment_name="gpt-4o-mini",
-    api_key=AZ_API_KEY,
-    azure_endpoint=AZ_LLM_EP,
-    api_version=AZ_API_VER,
-)
-embeddings = AzureOpenAIEmbedding(
-    model="text-embedding-3-large",
-    deployment_name="text-embedding-3-large",
-    api_key=AZ_API_KEY,
-    azure_endpoint=AZ_EMB_EP,
-    api_version=AZ_API_VER,
-)
+# Shared, read-only backends: built ONCE per process, not on every rerun
+# (each chat message reruns the script; rebuilding leaked Neo4j drivers).
+# Safe to share: no per-visitor state lives here (memory is per session below).
+@st.cache_resource(show_spinner=False)
+def load_backends():
+    # Initialize LLM and Embeddings
+    llm = AzureOpenAI(
+        model="gpt-4o-mini",
+        deployment_name="gpt-4o-mini",
+        api_key=AZ_API_KEY,
+        azure_endpoint=AZ_LLM_EP,
+        api_version=AZ_API_VER,
+    )
+    embeddings = AzureOpenAIEmbedding(
+        model="text-embedding-3-large",
+        deployment_name="text-embedding-3-large",
+        api_key=AZ_API_KEY,
+        azure_endpoint=AZ_EMB_EP,
+        api_version=AZ_API_VER,
+    )
+
+    # Neo4j Graph Index
+    neo4j_store = Neo4jPropertyGraphStore(
+        username=NEO4J_USERNAME,
+        password=NEO4J_PASSWORD,
+        url=NEO4J_URI,
+    )
+    graph_index = PropertyGraphIndex.from_existing(
+        property_graph_store=neo4j_store,
+        llm=llm,
+        embed_model=embeddings,
+    )
+
+
+    # Pinecone Vector Index
+    vector_store = PineconeVectorStore(
+        index_name="achievementsai",
+        namespace="achievementsai",
+        api_key=PINECONE_KEY
+    )
+
+    vector_index = VectorStoreIndex.from_vector_store(vector_store, embed_model=embeddings)
+    return llm, embeddings, graph_index, vector_index
+
+
+llm, embeddings, graph_index, vector_index = load_backends()
 Settings.llm = llm
 Settings.embed_model = embeddings
-
-# Neo4j Graph Index
-neo4j_store = Neo4jPropertyGraphStore(
-    username=NEO4J_USERNAME,
-    password=NEO4J_PASSWORD,
-    url=NEO4J_URI,
-)
-graph_index = PropertyGraphIndex.from_existing(
-    property_graph_store=neo4j_store,
-    llm=llm,
-    embed_model=embeddings,
-)
-
-
-# Pinecone Vector Index
-vector_store = PineconeVectorStore(
-    index_name="achievementsai",
-    namespace="achievementsai",
-    api_key=PINECONE_KEY
-)
-
-vector_index = VectorStoreIndex.from_vector_store(vector_store)
 
 # Function for sending email
 
@@ -222,13 +232,10 @@ SYSTEM_PROMPT = (
 # One agent (and chat memory) per browser session: a cache_resource agent would
 # share its ChatMemoryBuffer, i.e. one visitor's conversation, with every visitor.
 def load_agent():
-    return ReActAgent.from_tools(
-        tools,
-        llm=llm,
-        verbose=False,  # traces include visitor messages; keep them out of hosting logs
-        system_prompt=SYSTEM_PROMPT,
-        memory=ChatMemoryBuffer.from_defaults(token_limit=3900),
-    )
+    # llama-index >= 0.13 workflow agent (from_tools/.chat were removed); no
+    # verbose tracing, so visitor messages stay out of hosting logs.
+    agent = ReActAgent(tools=tools, llm=llm, system_prompt=SYSTEM_PROMPT, streaming=False)
+    return chat_guard.WorkflowChatAgent(agent, ChatMemoryBuffer.from_defaults(token_limit=3900))
 
 if "agent" not in st.session_state:
     st.session_state.agent = load_agent()
@@ -255,19 +262,11 @@ if "button_pressed" not in st.session_state:
 if "last_question" not in st.session_state:
     st.session_state.last_question = ""
 
-# Cap LLM calls per browser session (cost abuse on a public app).
-MAX_TURNS_PER_SESSION = 30
-st.session_state.setdefault("turns", 0)
-
-
+# LLM turns are rate-limited per session and process-wide (see chat_guard.py).
 def ask_agent(question: str) -> None:
+    sid = st.session_state.setdefault("session_id", uuid.uuid4().hex)
     with st.chat_message("assistant"):
-        if st.session_state.turns >= MAX_TURNS_PER_SESSION:
-            answer = ("This chat has reached its message limit. "
-                      "Please use the contact links in the sidebar to reach Juan.")
-        else:
-            st.session_state.turns += 1
-            answer = agent.chat(question).response
+        answer = chat_guard.answer(agent, question, sid)
         st.write(answer)
     st.session_state.messages.append({"role": "assistant", "content": answer})
 

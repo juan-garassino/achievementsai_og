@@ -115,12 +115,25 @@ def test_requirements_lines_are_valid():
 
 def test_app_caps_llm_turns_per_session():
     # G-012: unbounded LLM calls per session (cost abuse on a public app).
+    # Behavioural tests live in tests/test_chat_guard.py; here: one guarded call site.
     src = open("achievements_streamlit.py", encoding="utf-8").read()
-    assert "MAX_TURNS_PER_SESSION" in src
-    assert "def ask_agent" in src and src.count("agent.chat(") == 1  # one guarded call site
+    assert "def ask_agent" in src and "agent.chat(" not in src
+    assert open("chat_guard.py", encoding="utf-8").read().count("agent.chat(") == 1
 
 
 def test_agent_not_verbose():
     # G-014: verbose ReAct traces dump visitor messages into hosting logs.
     src = open("achievements_streamlit.py", encoding="utf-8").read()
     assert "verbose=True" not in src
+
+
+def test_smtp_failure_returns_generic_message(monkeypatch):
+    # G-017: SMTP errors (auth failure text, server banners) propagated into the
+    # agent's observation and could be echoed to the visitor.
+    monkeypatch.setattr(email_tool, "LIMITER", email_tool.RateLimiter())
+    import smtplib
+    with mock.patch("email_tool.smtplib.SMTP") as smtp:
+        smtp.return_value.__enter__.return_value.login.side_effect = smtplib.SMTPAuthenticationError(535, b"bad creds for sender")
+        out = email_tool.send_gmail("s", "m", app_password="x", session_id="z")
+    assert out == email_tool.SEND_FAILED_MESSAGE
+    assert "creds" not in out
